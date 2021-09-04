@@ -1,10 +1,10 @@
-# OpenMusic V1
+# OpenMusic V3
 this is ther version one of the OpenMusic api
 
 ## this project was made by 
 - Satria Aluh Perwira Nusa (fullstack)
 
-## How to Install the OpenMusic V1
+## How to Install the OpenMusic V3
 - create an .env file in the app root
 - fill the attributes of the .env file with these variables, ane make sure you change the value of these variables
 * |=================================================
