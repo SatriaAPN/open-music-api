@@ -6,13 +6,15 @@
     "extends": [
         "airbnb-base"
     ],
-    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 2020
+        "ecmaVersion": 2021
     },
     "rules": {
-        "no-console": "off",
-        "linebreak-style":"off",
-        "no-underscore-dangle":"off"
+        "no-console": "error",
+        "linebreak-style": ["error", "windows"],
+        "no-underscore-dangle":"off",
+        "global-require": "off",
+        "no-unused-vars":"off",
+        "max-len":"off"
     }
 }

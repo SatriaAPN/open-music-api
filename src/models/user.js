@@ -3,51 +3,40 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Song extends Model {
+  class User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ PlaylistsongModel }) {
+    static associate({ PlaylistModel, CollaborationModel }) {
       // define association here
-      this.hasMany(PlaylistsongModel, { foreignKey: 'songId' });
-    }
-
-    toJSON() {
-      return { ...this.get(), createdAt: undefined };
+      this.hasMany(PlaylistModel, { foreignKey: 'ownerId' });
+      this.hasMany(CollaborationModel, { foreignKey: 'userId' });
     }
   }
-  Song.init({
+  User.init({
     id: {
       primaryKey: true,
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
-    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    performer: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    genre: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    duration: {
-      type: DataTypes.INTEGER,
+    hashed: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   }, {
     sequelize,
-    tableName: 'songs',
-    modelName: 'SongModel',
+    tableName: 'users',
+    modelName: 'UserModel',
   });
-  return Song;
+  return User;
 };

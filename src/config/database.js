@@ -9,8 +9,8 @@ module.exports = {
     port: process.env.PGPORT || 5432,
     dialect: 'postgres',
     dialectOptions: {
-      bigNumberStrings: true
-    }
+      bigNumberStrings: true,
+    },
   },
   test: {
     username: process.env.CI_DB_USERNAME,
@@ -20,8 +20,8 @@ module.exports = {
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
-      bigNumberStrings: true
-    }
+      bigNumberStrings: true,
+    },
   },
   production: {
     username: process.env.PROD_DB_USERNAME,
@@ -31,7 +31,7 @@ module.exports = {
     port: process.env.PGPORT,
     dialect: 'postgres',
     dialectOptions: {
-      bigNumberStrings: true
-    }
-  }
+      bigNumberStrings: true,
+    },
+  },
 };

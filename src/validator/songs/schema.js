@@ -6,6 +6,8 @@ const SongPayloadSchema = Joi.object({
       .required(),
   year:
     Joi.number()
+      .min(1900)
+      .max(2030)
       .required(),
   performer:
     Joi.string()

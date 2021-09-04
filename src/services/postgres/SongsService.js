@@ -1,23 +1,26 @@
+/* eslint-disable radix */
+/* eslint-disable no-param-reassign */
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
+const { SongModel } = require('../../models');
 
-class songsService {
-  constructor(Song) {
-    this._Song = Song;
+class SongsService {
+  constructor() {
+    this._Song = SongModel;
   }
 
-  addSong = async({
+  async addSong({
     title, year, performer, genre, duration,
-  }) => {
-    const id = 'song-' + nanoid(10);
+  }) {
+    const id = `song-${nanoid(10)}`;
     year = parseInt(year);
     duration = parseInt(duration);
 
     const song = await this._Song.create({
-      id, title, year, performer, genre, duration
-    })
-    
+      id, title, year, performer, genre, duration,
+    });
+
     if (!song) {
       throw new InvariantError('lagu gagal ditambahkan');
     }
@@ -25,37 +28,36 @@ class songsService {
     return song.dataValues.id;
   }
 
-  getsongs = async() => {
+  async getSongs() {
     const songs = await this._Song.findAll({
       raw: true,
-      attributes: ['id', 'title', 'performer']
-    })
+      attributes: ['id', 'title', 'performer'],
+    });
 
     return songs;
   }
 
-  getSongById = async(id) => {
-
+  async getSongById(id) {
     const song = await this._Song.findOne({
       raw: true,
-      where: {id: id},
-      attributes: ['*', ['createdAt', 'insertedAt']]
-    })
+      where: { id },
+      attributes: ['*', ['createdAt', 'insertedAt']],
+    });
 
-    if(!song){
+    if (!song) {
       throw new NotFoundError('Gagal menemukan lagu. Id tidak ditemukan');
     }
 
     return song;
   }
 
-  editSongById = async(id, {
+  async editSongById(id, {
     title, year, performer, genre, duration,
-  }) => {
+  }) {
     const song = await this._Song.findOne({
-      where: {id: id}
+      where: { id },
     });
-    if(!song){
+    if (!song) {
       throw new NotFoundError('Gagal memperbarui lagu. Id tidak ditemukan');
     }
 
@@ -68,10 +70,10 @@ class songsService {
     await song.save();
   }
 
-  deleteSongById = async(id) => {
+  async deleteSongById(id) {
     const song = await this._Song.findOne({
-      where: {id: id}
-    })
+      where: { id },
+    });
     if (!song) {
       throw new NotFoundError('lagu gagal dihapus. Id tidak ditemukan');
     }
@@ -80,4 +82,4 @@ class songsService {
   }
 }
 
-module.exports = songsService;
+module.exports = SongsService;
