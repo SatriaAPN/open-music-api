@@ -1,4 +1,4 @@
-# OpenMusic V1
+# OpenMusic V3
 this is ther version one of the OpenMusic api
 
 ## this project was made by 
